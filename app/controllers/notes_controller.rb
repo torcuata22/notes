@@ -1,6 +1,6 @@
 class NotesController < ApplicationController
     before_action :set_note, only: %i[show edit update destroy]
-    before_action :authenticate_user
+    before_action :authenticate_user!
   
     def index
       @notes = Note.all
@@ -10,11 +10,12 @@ class NotesController < ApplicationController
     end
   
     def new
-      @note = Note.new
+      #@note = Note.new
+      @note = current_user.notes.build
     end
   
     def create
-      @note = Note.new(note_params)
+      @note = current_user.notes.build(note_params)
       respond_to do |format|
         if @note.save
           format.html { redirect_to note_url(@note), notice: "Your Note was created successfully" }
