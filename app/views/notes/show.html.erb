@@ -1,0 +1,6 @@
+<%= render @note %>
+<%= button_to "Delete this note", note_path(@note), method: :delete %>
+<br>
+<%= link_to "New Note", new_note_path %>
+<br>
+<%= link_to "Show All Notes", notes_path %>
